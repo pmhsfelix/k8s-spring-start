@@ -48,3 +48,42 @@ On GKE, this *load balander* service is done by:
 * Creating a TCP load balancer exposing the external IP and port 8080 associated with an instance group composed by all
 the cluster nodes.
 
+## Creating a pod via a manual definition file
+
+Create a YAML file with the following (see `k8s` folder)
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: manual-0
+spec:
+  containers:
+  - image: eu.gcr.io/isel-k8s-0/k8s-spring-start:v0.2.0
+    name: k8s-spring-start
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+```
+
+Run `kubectl create -f k8s/pod-manual-0.yaml`
+
+Run `kubectl logs manual-0` to observe the logs for the pod.
+
+Run `kubectl port-forward manual-0 8081:8080` to forward port 8081 of the **local machine** to the pod 8080 port.
+
+Run `kubectl label po manual-0 creation_method=manual` to set a label on an existing pod.
+
+Run `kubectl get po -L creation_method` to get information about pods including the `creation_method` label.
+
+Run `kubectl get po -l creation_method=manual` to filter the pods by a label.
+
+Run `kubectl get ns` to view all the existing namespaces.
+
+Run `kubectl get po  -n kube-system` to filter the pods by a namespace.
+
+Run `kubectl delete po manual-0` to delete a pod.
+
+Run `kubectl delete po -l creation_method=manual` to remove all pods with a given label.
+
+##

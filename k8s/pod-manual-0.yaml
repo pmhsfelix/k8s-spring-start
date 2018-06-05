@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: manual-0
+spec:
+  containers:
+  - image: eu.gcr.io/isel-k8s-0/k8s-spring-start:v0.2.0
+    name: k8s-spring-start
+    ports:
+    - containerPort: 8080
+      protocol: TCP

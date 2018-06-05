@@ -12,7 +12,7 @@ public class HelloController {
 
     @GetMapping()
     public String get(HttpServletRequest req) {
-        return "Hello from " +  req.getLocalAddr();
+        return String.format("Hello from %s at %s", req.getLocalName(), req.getLocalAddr());
     }
 
 }

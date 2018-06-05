@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: manual-lp
+spec:
+  containers:
+  - image: eu.gcr.io/isel-k8s-0/k8s-spring-start:v0.3.0
+    name: k8s-spring-start-hc
+    livenessProbe:
+      httpGet:
+        path: /probes/health
+        port: 8080
+    ports:
+    - containerPort: 8080
+      protocol: TCP
